@@ -14,13 +14,13 @@ const multer = Multer({
   },
 });
 
-let projectId = "YOUR-PROJECTID"; // Get this from Google Cloud
-let keyFilename = "PATH-TO-YOUR-KEYFILE.json"; // Get this from Google Cloud -> Credentials -> Service Accounts
+let projectId = "kol-test-387814"; // Get this from Google Cloud
+let keyFilename = "mykey.json"; // Get this from Google Cloud -> Credentials -> Service Accounts
 const storage = new Storage({
   projectId,
   keyFilename,
 });
-const bucket = storage.bucket("YOUR-STORAGE-BUCKET"); // Get this from Google Cloud -> Storage
+const bucket = storage.bucket("kol-data"); // Get this from Google Cloud -> Storage
 
 // Gets all files in the defined bucket
 app.get("/upload", async (req, res) => {
@@ -29,6 +29,7 @@ app.get("/upload", async (req, res) => {
     res.send([files]);
     console.log("Success");
   } catch (error) {
+
     res.send("Error:" + error);
   }
 });
