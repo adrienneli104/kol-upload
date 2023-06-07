@@ -4,13 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Storage</title>
+    <title>Google Cloud Storage</title>
+    <!-- Bootstrap CSS -->
+    <link href= "https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css"   href="/css/style.css">
 </head>
-<body onload="loadPosts()">
-    <h2>Google Storage API Test</h2>
-    <input type="file" accept=".jpg, .png, .csv, .xlsx" name="imgfile" id="imgfile">
-    <button id="submitBtn" >Submit</button>
-    <div class="" id="images"></div>
-    <script src="/submit.js"></script>
-</body>
+<body>
+    <div class= "container">
+        <h1>KOL Data Upload</h1>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-12 col-md-6 col-lg-3">
+                <form>
+                    <div class="mx-auto" style="width: 18rem">
+                        <div class="form-group">
+                            <input type="file" class="form-control" accept=".jpg, .png, .csv, .xlsx" name="imgfile" id="imgfile">
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col">
+                                    <button class="mt-4 btn btn-primary" id="submitBtn" >Submit</button>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+                            <div class="" id="images"></div>
+                            <script src="/submit.js"></script>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
 </html>
