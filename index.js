@@ -10,17 +10,17 @@ app.use(express.static(src));
 const multer = Multer({
   storage: Multer.memoryStorage(),
   limits: {
-    fileSize: 5 * 1024 * 1024, // No larger than 5mb, change as you need
+    fileSize: 5 * 1024 * 1024, // 5MB limit
   },
 });
 
-let projectId = "kol-test-387814"; // Get this from Google Cloud
-let keyFilename = "mykey.json"; // Get this from Google Cloud -> Credentials -> Service Accounts
+let projectId = "kol-test-387814"; 
+let keyFilename = "mykey.json";
 const storage = new Storage({
   projectId,
   keyFilename,
 });
-const bucket = storage.bucket("kol-data"); // Get this from Google Cloud -> Storage
+const bucket = storage.bucket("kol-data");
 
 // Gets all files in the defined bucket
 app.get("/upload", async (req, res) => {
@@ -33,8 +33,9 @@ app.get("/upload", async (req, res) => {
     res.send("Error:" + error);
   }
 });
+
 // Streams file upload to Google Storage
-app.post("/upload", multer.single("imgfile"), (req, res) => {
+app.post("/upload", multer.single("file"), (req, res) => {
   console.log("Made it /upload");
   try {
     if (req.file) {
@@ -47,15 +48,17 @@ app.post("/upload", multer.single("imgfile"), (req, res) => {
         console.log("Success");
       });
       blobStream.end(req.file.buffer);
-    } else throw "error with img";
+    } else throw "error";
   } catch (error) {
     res.status(500).send(error);
   }
 });
+
 // Get the main index html file
 app.get("/", (req, res) => {
   res.sendFile(src + "/index.html");
 });
+
 // Start the server on port 8080 or as defined
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
