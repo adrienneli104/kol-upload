@@ -40,7 +40,13 @@ app.post("/upload", multer.single("file"), (req, res) => {
   try {
     if (req.file) {
       console.log("File found, trying to upload...");
-      const blob = bucket.file(req.file.originalname);
+      // const blob = bucket.file(req.file.originalname);
+      // const blobStream = blob.createWriteStream();
+      
+      
+      // console.log(blob);
+      const path = `${req.body.folder}/${req.file.originalname}`;
+      const blob = bucket.file(path);
       const blobStream = blob.createWriteStream();
 
       blobStream.on("finish", () => {
