@@ -8,22 +8,23 @@ function uuidv4() {
   );
 }
 
-document.getElementById("submitBtn").addEventListener("click", () => {
+document.getElementById("submitBtn").addEventListener("click", function(event){
+  event.preventDefault();
   let postid = uuidv4();
   let inputElem = document.getElementById("file");
   let file = inputElem.files[0];
   let fileName = file.name;
   let ext = fileName.split('.')[1];
-  console.log("HIHIH");
+  let folderName = document.getElementById("folder").value;
   // Create new file so we can rename the file
   let blob = file.slice(0, file.size, ext);
   newFile = new File([blob], `${postid}_post.${ext}`, { type: ext });
   let formData = new FormData();
   formData.append("file", newFile);
+  formData.append("folder", folderName);
   fetch("/upload", {
     method: "POST",
-    body: formData,
-    // folder: folderName
+    body: formData
   })
     .then((res) => res.text())
 });
